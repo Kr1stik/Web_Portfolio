@@ -1,27 +1,78 @@
-export const Home = () => {
-    return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative">
-        <div className="text-center z-10 px-4">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#808080] to-[#3fada8] bg-clip-text text-transparent leading-right">
-                Hi, I am Wenard Roy Barrera
+import { useState } from "react"; // 1. Import useState
+import { ReviewOnScroll } from "../ReviewOnScroll";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faInstagram, faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import pfpImg from "../../assets/pfp.png"; 
+
+export const Home = ({ setActiveSection }) => {
+  // 2. State to track if the image is flipped
+  const [isFlipped, setIsFlipped] = useState(false);
+
+  const navItems = ["Home", "About", "Projects", "Contacts"];
+
+  return (
+    <section id="home" className="min-h-screen flex items-center justify-center relative bg-black overflow-hidden">
+      <ReviewOnScroll>
+        <div className="container mx-auto px-6 md:px-12 flex flex-col-reverse md:flex-row items-center justify-between gap-10 md:gap-0">
+          
+          {/* LEFT SIDE: TEXT */}
+          <div className="md:w-1/2 z-10 text-center md:text-left mt-10 md:mt-0">
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight leading-tight">
+              Wenard Roy <br /> Barrera
             </h1>
 
-            <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
-                A proficient web developer with skills in HTML, CSS, Django, 
-                while developing more knowledge in coding and logical skills. 
-                I am eager to contribute my knowledge to a collaborative team 
-                while expanding my professional skills. I can also contribute my 
-                proficiency in Figma and data management.
+            <p className="text-xl md:text-2xl text-gray-400 mb-6 font-medium">
+              Aspiring <span className="text-[#1ed760] font-bold">Web Developer</span> from Philippines
             </p>
-            <div className="flex justify-center space-x-4">
-                <a href="#projects" className="bg-blue-500 text-white py-3 px-6 rounded font-medium transition relative overflow-hidden hover:-translate-y-0.5
-                hover:shadow-[0_0_15px_rgba(59, 130, 246, 0.4)]">View Projects</a>
 
-                <a href="#contacts" className="border border-blue-500/50 text-blue-500 py-3 px-6 rounded font-medium transition-all 
-                duration-200 hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(59, 130, 246, 0.4)] hover:bg-blue-500/10">Contact Me</a>
-
+            <div className="flex justify-center md:justify-start space-x-6 mb-10">
+                {navItems.map((item) => (
+                    <a 
+                        key={item}
+                        href={`#${item.toLowerCase()}`}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            const section = document.querySelector(`#${item.toLowerCase()}`);
+                            section?.scrollIntoView({ behavior: "smooth" });
+                            setActiveSection(item.toLowerCase());
+                        }}
+                        className="text-gray-400 hover:text-white transition-colors text-lg font-medium relative group"
+                    >
+                        {item}
+                        <span className="absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-[#1ed760] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                    </a>
+                ))}
             </div>
+
+            <div className="flex justify-center md:justify-start space-x-6 text-gray-400">
+               <a href="#" className="hover:text-[#1ed760] transition text-2xl"><FontAwesomeIcon icon={faFacebook} /></a>
+               <a href="#" className="hover:text-[#1ed760] transition text-2xl"><FontAwesomeIcon icon={faInstagram} /></a>
+               <a href="#" className="hover:text-[#1ed760] transition text-2xl"><FontAwesomeIcon icon={faGithub} /></a>
+               <a href="#" className="hover:text-[#1ed760] transition text-2xl"><FontAwesomeIcon icon={faLinkedin} /></a>
+            </div>
+          </div>
+
+          {/* RIGHT SIDE: IMAGE */}
+          <div className="md:w-1/2 flex justify-center md:justify-end relative">
+            <div className="w-[300px] md:w-[450px] relative z-10">
+                <img 
+                  src={pfpImg} 
+                  alt="Wenard Roy Barrera" 
+                  // 3. Add onClick handler
+                  onClick={() => setIsFlipped(!isFlipped)}
+                  // 4. Update className to include transform logic
+                  className={`
+                    w-full h-auto object-contain 
+                    grayscale hover:grayscale-0 
+                    transition-all duration-700 ease-in-out drop-shadow-2xl cursor-pointer
+                    ${isFlipped ? "scale-x-[-1]" : ""} 
+                  `}
+                />
+            </div>
+          </div>
+
         </div>
+      </ReviewOnScroll>
     </section>
-    );  
+  );
 };

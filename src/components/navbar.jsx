@@ -1,42 +1,55 @@
-import { useEffect } from "react";
-export const Navbar = ({isMenuOpen, setIsMenuOpen}) => {
+import { useState, useEffect } from "react";
 
-    useEffect(() => {
-        document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-    }, [isMenuOpen]);
+export const Navbar = ({ activeSection, setActiveSection }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const navItems = ["Home", "About", "Projects", "Contacts"];
 
-    return <nav className="fixed top-0 w-full z-40 bg-[#19183B] text-[#708993] backdrop-blur-md border-b border-gray-800">
-        <div className="max-w-4xl mx-auto px-4">
-            <div className="max-w-6xl mx-auto flex justify-between items-center h-16">
-                <a href="#home" className="font-mono text-xl font-bold group transition duration-300">
-                {" "}
-                <span className="text-blue-500 group-hover:text-white transition-colors duration-300">Wenard</span>
-                <span className="text-white group-hover:text-blue-500 transition-colors duration-300">.Barrera</span>
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show navbar only after scrolling down 100px (leaving the home area)
+      if (window.scrollY > 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 transform ${
+        isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+      } bg-black/90 backdrop-blur-md border-b border-white/10`}
+    >
+      <div className="container mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
+        
+        {/* Your Name/Logo (Optional) */}
+        <div className="text-white font-bold text-xl tracking-tighter">Kr1stik.</div>
+
+        <ul className="flex space-x-8">
+          {navItems.map((item) => {
+            const sectionId = item.toLowerCase();
+            const isActive = activeSection === sectionId;
+            
+            return (
+              <li key={item}>
+                <a
+                  href={`#${sectionId}`}
+                  onClick={() => setActiveSection(sectionId)}
+                  className={`text-sm font-medium transition-colors duration-300 ${
+                    isActive ? "text-[#1ed760]" : "text-gray-300 hover:text-white"
+                  }`}
+                >
+                  {item}
                 </a>
-                
-                <div className="w-7 h-5 relative cursor-pointer z-40 md:hidden" 
-                onClick={() => setIsMenuOpen((prev) => !prev)}>
-                    &#9776;
-                </div>
-                
-                <div className="hidden md:flex space-x-8">
-                    <a href="#home" className="text-gray-300 hover:text-white transition duration-300 font-mono">
-                        {" "}Home{" "}
-                    </a>
-
-                    <a href="#about" className="text-gray-300 hover:text-white transition duration-300">
-                        {" "}About{" "}
-                    </a>
-                    
-                    <a href="#project" className="text-gray-300 hover:text-white transition duration-300">
-                        {" "}Projects{" "}
-                    </a>
-                    
-                    <a href="#contacts" className="text-gray-300 hover:text-white transition duration-300">
-                        {" "}Contact{" "}
-                    </a>
-                </div>
-            </div>
-        </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </nav>
-}
+  );
+};

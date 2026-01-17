@@ -1,94 +1,130 @@
+import { ReviewOnScroll } from "../ReviewOnScroll";
+
 export const About = () => {
+    
+    // Skills Data
+    const frontendSkills = ["HTML", "CSS", "JavaScript", "React", "Typescript", "Tailwind CSS"];
+    const backendSkills = ["Python", "Django", "PHP", "Node.js", "MySQL", "Firebase"];
 
-    const frontendSkills = [
-        "HTML", 
-        "CSS", 
-        "JavaScript", 
-        "React", 
-        "Tailwind CSS"
-    ];
+    return (
+        <section id="about" className="min-h-screen flex items-center justify-center py-20 bg-black text-white">
+            <ReviewOnScroll>
+                <div className="container mx-auto px-6 md:px-12 max-w-6xl">
+                    
+                    {/* SECTION HEADER */}
+                    <div className="mb-16">
+                        <h2 className="text-3xl md:text-5xl font-bold mb-4">
+                            About <span className="text-[#1ed760]">Me</span>
+                        </h2>
+                        <div className="w-20 h-1 bg-[#1ed760] rounded-full"></div>
+                    </div>
 
-    const backendSkills = [
-        "Python", 
-        "Django", 
-        "Php", 
-        "MySQL",
-        "Firebase"
-    ];
+                    {/* MAIN GRID LAYOUT */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        
+                        {/* LEFT COLUMN: Bio & Skills */}
+                        <div className="space-y-8">
+                            
+                            {/* Bio Card */}
+                            <div className="p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#1ed760]/50 transition-colors duration-300">
+                                <p className="text-gray-300 leading-relaxed text-lg">
+                                    I am <span className="text-white font-semibold">Wenard Roy Barrera</span>, a proficient web developer with a strong foundation in <span className="text-[#1ed760]">Computer Science</span>. 
+                                    I specialize in building dynamic, user-centric web applications using modern technologies like React and Django.
+                                </p>
+                            </div>
 
-    return ( 
-    <section id="about" className="min-h-screen flex items-center justify-center py-20">
-        <div className="max-w-3xl mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-[#808080] to-[#3fada8] bg-clip-text text-transparent">
-                About Me
-            </h2>
-            <div className="glass rounded-xl p-8 border-white/10 border hover:-translate-y-1 transition-all">
-                <p className='text-gray-300 mb-6'>
-                    A proficient web developer with skills in HTML, CSS, Django, 
-                    while developing more knowledge in coding and logical skills.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="rounded-xl p-6 hover:-translate-y-1 transition-all">
-                  <h3 className="text-xl font-bold mb-4">Frontend</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {frontendSkills.map((tech, key) => (
-                      <span key={key}
-                        className="bg-blue-500/10 text-blue-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20
-                        hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="rounded-xl p-6 hover:-translate-y-1 transition-all">
-                  <h3 className="text-xl font-bold mb-4">Backend</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {backendSkills.map((tech, key) => (
-                      <span key={key}
-                        className="bg-blue-500/10 text-blue-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20
-                        hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-                <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
-                    <h3 className="text-xl font-bold mb-4">Education</h3>
-                    <ul className="list-disc list-inside text-gray-300 space-y-2">
-                        <li>
-                            <strong>Bachelor of Science in Computer Science</strong> - STI West Negros University (2022 - 2026)
-                        </li>
-                        <li>
-                            Relevant Coursework: Data Structures, Web Development, Database Management
-                        </li>
-                    </ul>
-                </div>
-                <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
-                    <h3 className="text-xl font-bold mb-4">Work Experience</h3>
-                    <div className="space-y-4 text-gray-300">
-                        <div>
-                            <h4 className="font-semibold">
-                                {" "}
-                                Assistant Programmer at DEVINNOVATE {" "}</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                            </p>
+                            {/* Skills Section */}
+                            <div className="space-y-6">
+                                {/* Frontend */}
+                                <div>
+                                    <h3 className="text-xl font-bold mb-4 text-gray-200">Frontend</h3>
+                                    <div className="flex flex-wrap gap-3">
+                                        {frontendSkills.map((tech, key) => (
+                                            <span key={key}
+                                                className="bg-white/5 text-gray-300 py-2 px-4 rounded-full text-sm font-medium border border-white/10 hover:border-[#1ed760]/50 hover:text-[#1ed760] transition-all cursor-default"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                                {/* Backend */}
+                                <div>
+                                    <h3 className="text-xl font-bold mb-4 text-gray-200">Backend</h3>
+                                    <div className="flex flex-wrap gap-3">
+                                        {backendSkills.map((tech, key) => (
+                                            <span key={key}
+                                                className="bg-white/5 text-gray-300 py-2 px-4 rounded-full text-sm font-medium border border-white/10 hover:border-[#1ed760]/50 hover:text-[#1ed760] transition-all cursor-default"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h4 className="font-semibold">
-                                Intern at DEVINNOVATE (2026)</h4>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                            </p>
+
+
+                        {/* RIGHT COLUMN: Education & Experience (Timeline Look) */}
+                        <div className="space-y-8">
+                            
+                            {/* Education */}
+                            <div className="p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#1ed760]/50 transition-colors duration-300">
+                                <h3 className="text-2xl font-bold mb-6 flex items-center">
+                                    <span className="text-[#1ed760] mr-3 text-xl">01.</span> Education
+                                </h3>
+                                <div className="ml-2 border-l-2 border-white/10 pl-6 space-y-2">
+                                    <h4 className="text-xl font-semibold text-white">Bachelor of Science in Computer Science</h4>
+                                    <p className="text-[#1ed760] font-medium">STI West Negros University</p>
+                                    <p className="text-sm text-gray-500">2022 - 2026</p>
+                                    <p className="text-gray-400 mt-2 text-sm">Relevant Coursework: Data Structures, Web Development, Database Management</p>
+                                </div>
+                            </div>
+
+                            {/* Experience */}
+                            <div className="p-8 rounded-2xl border border-white/10 bg-white/5 hover:border-[#1ed760]/50 transition-colors duration-300">
+                                <h3 className="text-2xl font-bold mb-6 flex items-center">
+                                    <span className="text-[#1ed760] mr-3 text-xl">02.</span> Experience
+                                </h3>
+                                <div className="space-y-8">
+                                    
+                                    {/* Job 1 */}
+                                    <div className="ml-2 border-l-2 border-white/10 pl-6 relative">
+                                        <div className="absolute w-3 h-3 bg-[#1ed760] rounded-full -left-[7px] top-2 shadow-[0_0_10px_#1ed760]"></div>
+                                        <h4 className="text-xl font-semibold text-white">Assistant Programmer</h4>
+                                        <p className="text-[#1ed760] font-medium text-sm mb-2">DEVINNOVATE | 2024 - Present</p>
+                                        <p className="text-gray-400 text-sm leading-relaxed">
+                                            Assisted in developing backend modules using Python and Django. Collaborated with the team to design database schemas and API endpoints.
+                                        </p>
+                                    </div>
+
+                                    {/* Job 2 (Internship or Previous Role) */}
+                                    <div className="ml-2 border-l-2 border-white/10 pl-6 relative">
+                                        <div className="absolute w-3 h-3 bg-gray-600 rounded-full -left-[7px] top-2"></div>
+                                        <h4 className="text-xl font-semibold text-white">Lead A Group</h4>
+                                        <p className="text-gray-500 font-medium text-sm mb-2">Despicable Me | Early 2024</p>
+                                        <p className="text-gray-400 text-sm leading-relaxed">
+                                            Gained hands-on experience in frontend and backend technologies like CSS, Javascript and Firebase working on client-side interfaces.
+                                        </p>
+                                    </div>
+
+                                    <div className="ml-2 border-l-2 border-white/10 pl-6 relative">
+                                        <div className="absolute w-3 h-3 bg-gray-600 rounded-full -left-[7px] top-2"></div>
+                                        <h4 className="text-xl font-semibold text-white">UI/UX</h4>
+                                        <p className="text-gray-500 font-medium text-sm mb-2">Light Triad | Early 2024</p>
+                                        <p className="text-gray-400 text-sm leading-relaxed">
+                                            Had an experience in designing user interfaces and improving user experience for web applications using Figma.
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+
                         </div>
+
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </ReviewOnScroll>
+        </section>
     );
 };
