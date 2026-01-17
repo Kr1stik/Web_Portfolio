@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ReviewOnScroll } from "../ReviewOnScroll";
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 
 export const Contacts = () => {
     const [formData, setFormData] = useState({
