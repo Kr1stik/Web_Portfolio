@@ -22,7 +22,7 @@ export const Home = ({ setActiveSection }) => {
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-400 mb-6 font-medium">
-              Aspiring <span className="text-[#1ed760] font-bold">Web Developer</span> from Philippines
+              Aspiring <span className="text-[#1ed760] font-bold">Software Developer</span> from Philippines
             </p>
 
             <div className="flex justify-center md:justify-start space-x-6 mb-10">
