@@ -82,7 +82,7 @@ export const Contacts = () => {
                                         </svg>
                                     </div>
                                     <span className="text-lg text-gray-300">
-                                        Bacolod, Philippines
+                                        Bacolod City, Philippines
                                     </span>
                                 </div>
                             </div>

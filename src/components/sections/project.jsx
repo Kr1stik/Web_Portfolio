@@ -6,6 +6,14 @@ export const Projects = () => {
     
     const projects = [
         {
+            title: "Sentinels (Thesis)",
+            description: "An educational 2D RPG game (Pokémon-style) designed to teach Cybersecurity Fundamentals. Players learn concepts by completing a task related to cyber threats. Includes a comprehensive Web Admin dashboard for instructors to manage users and track student progress.",
+            techStack: ["Game Dev", "Tailwind CSS", "Django", "Python"],
+            link: "#",
+            github: "#",
+            status: "Completed"
+        },
+        {
             title: "Metro Bacolod Connect",
             description: "A PropTech application facilitating connections in Bacolod. Recently updated to use TypeScript and Node.js for better scalability.",
             techStack: ["React", "Node.js", "Firebase", "TypeScript"],

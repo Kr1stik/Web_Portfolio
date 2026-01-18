@@ -7,6 +7,7 @@ import { Home } from "./components/sections/home";
 import { About } from "./components/sections/about";
 import { Contacts } from "./components/sections/contacts";
 import { Projects } from "./components/sections/project";
+import Footer from "./components/sections/Footer";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -29,12 +30,15 @@ function App() {
 
   return ( 
     <>
-        <Navbar activeSection={activeSection} setActiveSection={setActiveSection} />
+        <Navbar activeSection={activeSection} setActiveSection={setActiveSection} 
+        menuOpen={isMenuOpen} 
+        setMenuOpen={setIsMenuOpen} />
         <MobileMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
         <Home setActiveSection={setActiveSection} />
         <About setActiveSection={setActiveSection} />
         <Projects setActiveSection={setActiveSection} />
         <Contacts setActiveSection={setActiveSection} />
+        <Footer />
     </>
   );
 };

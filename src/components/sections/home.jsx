@@ -45,10 +45,10 @@ export const Home = ({ setActiveSection }) => {
             </div>
 
             <div className="flex justify-center md:justify-start space-x-6 text-gray-400">
-               <a href="#" className="hover:text-[#1ed760] transition text-2xl"><FontAwesomeIcon icon={faFacebook} /></a>
-               <a href="#" className="hover:text-[#1ed760] transition text-2xl"><FontAwesomeIcon icon={faInstagram} /></a>
-               <a href="#" className="hover:text-[#1ed760] transition text-2xl"><FontAwesomeIcon icon={faGithub} /></a>
-               <a href="#" className="hover:text-[#1ed760] transition text-2xl"><FontAwesomeIcon icon={faLinkedin} /></a>
+               <a href="https://www.facebook.com/Kr1stik" className="hover:text-[#1ed760] transition text-2xl"><FontAwesomeIcon icon={faFacebook} /></a>
+               <a href="https://www.instagram.com/kr1stikk?igsh=bWQwMm9uaTF1c2Nt" className="hover:text-[#1ed760] transition text-2xl"><FontAwesomeIcon icon={faInstagram} /></a>
+               <a href="https://github.com/Kr1stik" className="hover:text-[#1ed760] transition text-2xl"><FontAwesomeIcon icon={faGithub} /></a>
+               <a href="https://www.linkedin.com/in/wenard-roy-barrera-570171290/" className="hover:text-[#1ed760] transition text-2xl"><FontAwesomeIcon icon={faLinkedin} /></a>
             </div>
           </div>
 
@@ -63,7 +63,6 @@ export const Home = ({ setActiveSection }) => {
                   // 4. Update className to include transform logic
                   className={`
                     w-full h-auto object-contain 
-                    grayscale hover:grayscale-0 
                     transition-all duration-700 ease-in-out drop-shadow-2xl cursor-pointer
                     ${isFlipped ? "scale-x-[-1]" : ""} 
                   `}
