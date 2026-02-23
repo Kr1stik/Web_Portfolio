@@ -88,9 +88,30 @@ export const About = () => {
                                 </h3>
                                 <div className="space-y-8">
                                     
-                                    {/* Job 1 */}
+                                    {/* Job 1: DHSUD Internship (NEW) */}
                                     <div className="ml-2 border-l-2 border-white/10 pl-6 relative">
                                         <div className="absolute w-3 h-3 bg-[#1ed760] rounded-full -left-[7px] top-2 shadow-[0_0_10px_#1ed760]"></div>
+                                        <h4 className="text-xl font-semibold text-white">System Developer Intern</h4>
+                                        <p className="text-[#1ed760] font-medium text-sm mb-2">DHSUD | 2026 - Present</p>
+                                        <p className="text-gray-400 text-sm leading-relaxed">
+                                            Currently completing a 300-hour On-the-Job Training (OJT) internship. Focused on the development, optimization, and maintenance of internal system applications.
+                                        </p>
+                                    </div>
+
+                                    {/* Job 2: COS Devs (NEW) */}
+                                    <div className="ml-2 border-l-2 border-white/10 pl-6 relative">
+                                        <div className="absolute w-3 h-3 bg-[#1ed760] rounded-full -left-[7px] top-2 shadow-[0_0_10px_#1ed760]"></div>
+                                        <h4 className="text-xl font-semibold text-white">Part-time Developer</h4>
+                                        <p className="text-[#1ed760] font-medium text-sm mb-2">COS Devs | 2026 - Present</p>
+                                        <p className="text-gray-400 text-sm leading-relaxed">
+                                            Collaborating on web development projects, building robust backend solutions, and ensuring seamless user experiences using modern tech stacks.
+                                        </p>
+                                    </div>
+
+                                    {/* Job 3: DEVINNOVATE */}
+                                    <div className="ml-2 border-l-2 border-white/10 pl-6 relative">
+                                        {/* 👇 Removed the shadow class from this line so it no longer glows */}
+                                        <div className="absolute w-3 h-3 bg-gray-600 rounded-full -left-[7px] top-2"></div>
                                         <h4 className="text-xl font-semibold text-white">Assistant Programmer</h4>
                                         <p className="text-[#1ed760] font-medium text-sm mb-2">DEVINNOVATE | 2024 - Present</p>
                                         <p className="text-gray-400 text-sm leading-relaxed">
@@ -98,7 +119,7 @@ export const About = () => {
                                         </p>
                                     </div>
 
-                                    {/* Job 2 (Internship or Previous Role) */}
+                                    {/* Job 4: Despicable Me */}
                                     <div className="ml-2 border-l-2 border-white/10 pl-6 relative">
                                         <div className="absolute w-3 h-3 bg-gray-600 rounded-full -left-[7px] top-2"></div>
                                         <h4 className="text-xl font-semibold text-white">Lead A Group</h4>
@@ -108,6 +129,7 @@ export const About = () => {
                                         </p>
                                     </div>
 
+                                    {/* Job 5: Light Triad */}
                                     <div className="ml-2 border-l-2 border-white/10 pl-6 relative">
                                         <div className="absolute w-3 h-3 bg-gray-600 rounded-full -left-[7px] top-2"></div>
                                         <h4 className="text-xl font-semibold text-white">UI/UX</h4>
