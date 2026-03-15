@@ -1,0 +1,52 @@
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  padding: 16px 0 48px 0; /* Extra padding at the bottom for the dots */
+  margin: 0 auto;
+}
+
+.carousel-track {
+  display: flex;
+  height: 100%;
+}
+
+.carousel-item {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  cursor: grab;
+  height: 100%;
+}
+
+.carousel-item:active {
+  cursor: grabbing;
+}
+
+.carousel-indicators-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.carousel-indicators {
+  display: flex;
+  gap: 12px;
+}
+
+.carousel-indicator {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #333;
+  transition: all 150ms ease-in-out;
+}
+
+.carousel-indicator.active {
+  background-color: #1ed760; /* Your signature green */
+  transform: scale(1.2);
+}

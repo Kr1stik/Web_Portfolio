@@ -113,29 +113,9 @@ export const About = () => {
                                         {/* 👇 Removed the shadow class from this line so it no longer glows */}
                                         <div className="absolute w-3 h-3 bg-gray-600 rounded-full -left-[7px] top-2"></div>
                                         <h4 className="text-xl font-semibold text-white">Assistant Programmer</h4>
-                                        <p className="text-[#1ed760] font-medium text-sm mb-2">DEVINNOVATE | 2024 - Present</p>
+                                        <p className="text-gray-500 font-medium text-sm mb-2">DEVINNOVATE | 2024 - 2025</p>
                                         <p className="text-gray-400 text-sm leading-relaxed">
                                             Assisted in developing backend modules using Python and Django. Collaborated with the team to design database schemas and API endpoints.
-                                        </p>
-                                    </div>
-
-                                    {/* Job 4: Despicable Me */}
-                                    <div className="ml-2 border-l-2 border-white/10 pl-6 relative">
-                                        <div className="absolute w-3 h-3 bg-gray-600 rounded-full -left-[7px] top-2"></div>
-                                        <h4 className="text-xl font-semibold text-white">Lead A Group</h4>
-                                        <p className="text-gray-500 font-medium text-sm mb-2">Despicable Me | Early 2024</p>
-                                        <p className="text-gray-400 text-sm leading-relaxed">
-                                            Gained hands-on experience in frontend and backend technologies like CSS, Javascript and Firebase working on client-side interfaces.
-                                        </p>
-                                    </div>
-
-                                    {/* Job 5: Light Triad */}
-                                    <div className="ml-2 border-l-2 border-white/10 pl-6 relative">
-                                        <div className="absolute w-3 h-3 bg-gray-600 rounded-full -left-[7px] top-2"></div>
-                                        <h4 className="text-xl font-semibold text-white">UI/UX</h4>
-                                        <p className="text-gray-500 font-medium text-sm mb-2">Light Triad | Early 2024</p>
-                                        <p className="text-gray-400 text-sm leading-relaxed">
-                                            Had an experience in designing user interfaces and improving user experience for web applications using Figma.
                                         </p>
                                     </div>
 
