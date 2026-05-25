@@ -11,18 +11,21 @@ export const projects = [
         title: "Metro Bacolod Connect",
         description: "A PropTech application facilitating connections in Bacolod. Recently updated to use TypeScript and Node.js.",
         techStack: ["React", "Node.js", "Firebase", "TypeScript"],
-        link: "#", // Add your GitHub link here
+        link: "#",
+        image: "/src/assets/metro.jpg"
     },
     {
         title: "POS SYSTEM",
         description: "A web-based Point of Sale (POS) system built with HTML, CSS and Javascript",
         techStack: ["React", "Django", "Tailwind CSS"],
         link: "https://kr1stik.github.io/MABELS/",
+        image: "/src/assets/mabels.png"
     },
     {
         title: "Movieboxd",
         description: "A web-based movie review application built with Django, Python and Tailwind CSS",
         techStack: ["Python", "Django", "Tailwind CSS"],
         link: "#",
+        image: "/src/assets/pfp.png" // Fallback since movieboxd image not found
     }
 ];

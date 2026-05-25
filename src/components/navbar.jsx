@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import logo from "../assets/logo2.png"; // 👈 Import the logo
+import logo from "../assets/logo2.png";
+import { useTechSound } from "../hooks/useTechSound";
+import { SoundToggle } from "./SoundToggle";
 
-export const Navbar = ({ activeSection, setActiveSection, menuOpen, setMenuOpen }) => {
+export const Navbar = ({ activeSection, setActiveSection, menuOpen, setMenuOpen, isMuted, onToggleSound }) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { playHoverSound } = useTechSound();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,7 +22,7 @@ export const Navbar = ({ activeSection, setActiveSection, menuOpen, setMenuOpen 
 
   return (
     <nav
-      className={`fixed top-0 w-full z-40 transition-all duration-300 border-b border-white/10 bg-black/90 backdrop-blur-md ${
+      className={`fixed top-0 w-full z-40 transition-all duration-300 border-b border-[#1ed760]/20 bg-black/80 backdrop-blur-md ${
         isVisible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"
       } 
       py-2 px-6`}
@@ -29,18 +32,17 @@ export const Navbar = ({ activeSection, setActiveSection, menuOpen, setMenuOpen 
         {/* Logo + Name Section */}
         <a 
           href="#home" 
-          className="flex items-center gap-2 cursor-pointer group" // 👈 Added flex and gap
+          onMouseEnter={playHoverSound}
+          className="flex items-center gap-2 cursor-pointer group"
         >
-          {/* Logo Image */}
           <img 
             src={logo} 
             alt="Logo" 
-            className="w-8 h-8 object-contain transition-transform group-hover:scale-110" // 👈 Size and hover effect
+            className="w-8 h-8 object-contain transition-transform group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_#1ed760]"
           />
           
-          {/* Text Name */}
-          <span className="text-xl font-bold text-white">
-            kr1stik<span className="text-green-500">.</span>
+          <span className="text-xl font-bold text-white font-orbitron tracking-tighter">
+            KR1STIK<span className="text-[#1ed760]">.</span>
           </span>
         </a>
 
@@ -50,27 +52,35 @@ export const Navbar = ({ activeSection, setActiveSection, menuOpen, setMenuOpen 
             <a
               key={section}
               href={`#${section}`}
+              onMouseEnter={playHoverSound}
               onClick={() => setActiveSection(section)}
-              className={`text-sm font-medium transition-colors hover:text-green-400 capitalize ${
-                activeSection === section ? "text-green-500" : "text-gray-300"
+              className={`text-xs font-bold transition-all hover:text-[#1ed760] font-orbitron uppercase tracking-widest ${
+                activeSection === section ? "text-[#1ed760] text-glow-green" : "text-gray-400"
               }`}
             >
               {section}
             </a>
           ))}
+          
+          {/* Sound Toggle */}
+          <SoundToggle isMuted={isMuted} onToggle={onToggleSound} />
+
           <a
             href="#contacts"
-            className="px-4 py-1.5 bg-green-500 text-black text-sm font-semibold rounded-full hover:bg-green-400 transition-all"
+            onMouseEnter={playHoverSound}
+            className="px-6 py-1.5 bg-[#1ed760] text-black text-xs font-bold font-orbitron uppercase tracking-widest chamfered hover:bg-white transition-all shadow-[0_0_15px_rgba(30,215,96,0.3)]"
           >
-            Hire Me
+            INITIALIZE
           </a>
         </div>
 
         {/* Hamburger Button (Mobile) */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center gap-4">
+          <SoundToggle isMuted={isMuted} onToggle={onToggleSound} />
           <button
-            className="text-white focus:outline-none"
+            className="text-[#1ed760] focus:outline-none"
             onClick={() => setMenuOpen(!menuOpen)}
+            onMouseEnter={playHoverSound}
             aria-label="Toggle menu"
           >
             <svg

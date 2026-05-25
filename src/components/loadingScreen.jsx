@@ -1,85 +1,109 @@
 import { useEffect, useState } from "react";
-// Import your logo or profile picture for the center
-import centerImage from "../assets/logo2.png"; 
+import { motion, AnimatePresence } from "framer-motion";
 
 export const LoadingScreen = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
+  const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
-    // Simulate loading progress
     const interval = setInterval(() => {
-      setProgress((prevProgress) => {
-        if (prevProgress >= 100) {
+      setProgress((prev) => {
+        if (prev >= 100) {
           clearInterval(interval);
-          // Wait half a second at 100% before triggering completion
-          setTimeout(() => {
-            onComplete();
-          }, 500);
+          setIsFinished(true);
+          // Small delay for the visual "Hero Time" reveal before unmounting
+          setTimeout(onComplete, 1500);
           return 100;
         }
-        // Randomly jump the progress bar by 5-15% to make it feel real
-        return prevProgress + Math.floor(Math.random() * 10) + 5; 
+        const jump = Math.floor(Math.random() * 15) + 5;
+        return Math.min(prev + jump, 100);
       });
-    }, 150); // Updates every 150ms
+    }, 100);
 
     return () => clearInterval(interval);
   }, [onComplete]);
 
-  // SVG Circle Math for the progress ring
-  const radius = 50;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (progress / 100) * circumference;
-
   return (
-    <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black">
-      
-      {/* Loading Ring & Image Container */}
-      <div className="relative flex items-center justify-center mb-6">
-        
-        {/* Background Track Circle */}
-        <svg className="w-32 h-32 transform -rotate-90 absolute">
-          <circle
-            className="text-white/10"
-            strokeWidth="6"
-            stroke="currentColor"
-            fill="transparent"
-            r={radius}
-            cx="64"
-            cy="64"
-          />
-          
-          {/* Animated Progress Circle */}
-          <circle
-            className="text-[#1ed760] transition-all duration-200 ease-out"
-            strokeWidth="6"
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
-            strokeLinecap="round"
-            stroke="currentColor"
-            fill="transparent"
-            r={radius}
-            cx="64"
-            cy="64"
-          />
-        </svg>
+    <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black overflow-hidden">
+      <AnimatePresence mode="wait">
+        {!isFinished ? (
+          <motion.div
+            key="loading"
+            exit={{ 
+              scale: 1.2, 
+              opacity: 0, 
+              filter: "brightness(2) blur(5px)",
+            }}
+            transition={{ duration: 0.5 }}
+            className="relative flex flex-col items-center"
+          >
+            {/* Target Rings */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                className="w-[300px] h-[300px] border-2 border-[#1ed760]/20 rounded-full border-dashed"
+              />
+            </div>
 
-        {/* Center Image */}
-        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-black z-10 bg-[#111] flex items-center justify-center">
-          <img 
-            src={centerImage} 
-            alt="Loading..." 
-            className="w-full h-full object-cover p-2" 
-          />
-        </div>
+            {/* Omnitrix Hourglass */}
+            <div className="relative w-48 h-48 flex items-center justify-center">
+              <div className="absolute inset-0 bg-[#1ed760] rounded-full opacity-10 blur-2xl animate-pulse" />
+              <div className="relative w-full h-full bg-[#111] rounded-full border-4 border-[#222] flex items-center justify-center overflow-hidden">
+                <div 
+                  className="w-32 h-32 bg-[#1ed760] transition-all duration-300 shadow-[0_0_15px_#1ed760]"
+                  style={{
+                    clipPath: "polygon(20% 0%, 80% 0%, 50% 50%, 80% 100%, 20% 100%, 50% 50%)",
+                    opacity: 0.2 + (progress / 100) * 0.8
+                  }}
+                />
+                <div 
+                  className="absolute inset-0 bg-black/70 transition-all duration-300"
+                  style={{ height: `${100 - progress}%` }}
+                />
+              </div>
+            </div>
 
-      </div>
-
-      {/* Loading Text */}
-      <div className="text-white font-mono text-xl font-bold flex items-center gap-2">
-        <span>{progress}%</span>
-        <span className="text-gray-400 font-sans font-medium text-base tracking-widest uppercase">Loading...</span>
-      </div>
-
+            <div className="mt-12 text-center">
+              <div className="text-[#1ed760] font-orbitron text-5xl font-bold tracking-[0.2em] mb-3 text-glow-green">
+                {progress}%
+              </div>
+              <div className="text-gray-500 font-mono text-[10px] tracking-[0.5em] uppercase">
+                Calibrating Omnitrix...
+              </div>
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="reveal"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ 
+                scale: [0.8, 1.1, 1], 
+                opacity: 1,
+            }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col items-center"
+          >
+            <motion.div 
+              animate={{ 
+                boxShadow: ["0 0 20px #1ed760", "0 0 60px #1ed760", "0 0 20px #1ed760"],
+              }}
+              transition={{ duration: 0.4, repeat: Infinity }}
+              className="w-64 h-64 bg-[#1ed760] flex items-center justify-center rounded-full mb-8 shadow-[0_0_40px_#1ed760]"
+              style={{
+                clipPath: "polygon(20% 0%, 80% 0%, 50% 50%, 80% 100%, 20% 100%, 50% 50%)"
+              }}
+            />
+            <motion.h1 
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              className="text-[#1ed760] text-6xl font-bold font-orbitron text-glow-green tracking-widest"
+            >
+              HERO TIME
+            </motion.h1>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
