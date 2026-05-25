@@ -4,7 +4,7 @@ import { ProjectCard } from "../ProjectCards";
 // 👇 IMPORT YOUR PROJECT IMAGES HERE 👇
 import metroImg from "../../assets/metro.jpg";
 import mabelsImg from "../../assets/mabels.png";
-import hredrdImg from "../../assets/hredrd.png";
+import hredrdImg from "../../assets/HREDRD.png";
 
 // 👇 MAIN COMPONENT 👇
 export const Projects = () => {
