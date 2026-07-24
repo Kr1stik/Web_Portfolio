@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { ReviewOnScroll } from "../ReviewOnScroll";
 import emailjs from '@emailjs/browser';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faMapMarkerAlt, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 export const Contacts = () => {
     const [formData, setFormData] = useState({
@@ -15,11 +16,6 @@ export const Contacts = () => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // 🔍 DEBUGGING: Check if keys are loaded
-        console.log("Service ID:", import.meta.env.VITE_SERVICE_ID);
-        console.log("Template ID:", import.meta.env.VITE_TEMPLATE_ID);
-        console.log("Public Key:", import.meta.env.VITE_PUBLIC_KEY);
-
         emailjs
         .sendForm(
             import.meta.env.VITE_SERVICE_ID, 
@@ -28,125 +24,150 @@ export const Contacts = () => {
             import.meta.env.VITE_PUBLIC_KEY
         )
         .then(() => {
-            alert("Message Sent!");
+            alert("[STATUS: 200] Message transmitted successfully!");
             setFormData({name: "", email: "", message: ""});
             setIsSubmitting(false);
         })
         .catch((error) => {
-            console.log("FAILED...", error); // Logs the actual error to console
-            alert("Failed to send. Check console for details.");
+            console.log("TRANSMISSION FAILED...", error);
+            alert("Transmission failed. Check developer console.");
             setIsSubmitting(false);
         });
     };
 
     return ( 
-        <section id="contacts" className="min-h-screen flex items-center justify-center py-20 bg-black text-white relative overflow-hidden">
-            
-            {/* Background Gradient Glow (Subtle Green) */}
-            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-[#1ed760]/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+        <div className="w-full h-full overflow-y-auto no-scrollbar max-h-[calc(100vh-140px)] p-2 sm:p-4">
+            {/* 2-Column Split Pane Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center max-w-6xl mx-auto min-h-full py-4">
+                
+                {/* LEFT COLUMN: Context */}
+                <div className="flex flex-col justify-between space-y-5 text-left h-full py-2">
+                    <div className="space-y-3">
+                        <div className="text-xs font-mono text-[#1ed760]">
+                            // ESTABLISH_CONNECTION
+                        </div>
 
-            <ReviewOnScroll>    
-                <div className="container mx-auto px-6 md:px-12 max-w-6xl">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-                        
-                        {/* LEFT SIDE: Contact Info & Text */}
-                        <div className="space-y-8">
+                        <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
+                            Get In <br />
+                            <span className="text-[#1ed760]">Touch</span>
+                        </h2>
+
+                        <p className="text-sm text-neutral-300 leading-relaxed max-w-md">
+                            Have a technical project, contract inquiry, or open engineering role? Transmit a message directly or email me.
+                        </p>
+                    </div>
+
+                    <div className="space-y-3 font-mono text-xs">
+                        <div className="p-3.5 bg-[#0c0c0e] border border-gray-800 rounded-xl flex items-center space-x-3">
+                            <div className="p-2.5 rounded-lg bg-[#1ed760]/10 text-[#1ed760] border border-[#1ed760]/30">
+                                <FontAwesomeIcon icon={faEnvelope} />
+                            </div>
                             <div>
-                                <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                                    Let's work <br />
-                                    <span className="text-[#1ed760]">together.</span>
-                                </h2>
-                                <p className="text-gray-400 text-lg leading-relaxed">
-                                    I'm currently available for freelance work and open to new projects. 
-                                    If you have an idea for a web application, feel free to drop a message!
-                                </p>
-                            </div>
-
-                            <div className="space-y-4">
-                                <div className="flex items-center space-x-4">
-                                    <div className="bg-[#1ed760]/10 p-3 rounded-full text-[#1ed760]">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                        </svg>
-                                    </div>
-                                    <a href="mailto:your.email@example.com" className="text-lg hover:text-[#1ed760] transition-colors">
-                                        wenardroybarrera@gmail.com
-                                    </a>
-                                </div>
-
-                                <div className="flex items-center space-x-4">
-                                    <div className="bg-[#1ed760]/10 p-3 rounded-full text-[#1ed760]">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg>
-                                    </div>
-                                    <span className="text-lg text-gray-300">
-                                        Bacolod City, Philippines
-                                    </span>
-                                </div>
+                                <span className="text-[10px] text-gray-500 block">DIRECT_EMAIL</span>
+                                <a href="mailto:wenardroybarrera@gmail.com" className="text-white hover:text-[#1ed760] transition-colors font-semibold">
+                                    wenardroybarrera@gmail.com
+                                </a>
                             </div>
                         </div>
 
-                        {/* RIGHT SIDE: The Form */}
-                        <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm">
-                            <form className="space-y-6" onSubmit={handleSubmit}>
-                                
-                                <div className="space-y-2">
-                                    <label htmlFor="name" className="text-sm font-medium text-gray-400">Your Name</label>
-                                    <input 
-                                        type="text" 
-                                        id="name"
-                                        name="name" 
-                                        required 
-                                        value={formData.name} 
-                                        className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#1ed760] focus:ring-1 focus:ring-[#1ed760] transition-all placeholder-gray-600" 
-                                        placeholder="e.g. John Doe"
-                                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label htmlFor="email" className="text-sm font-medium text-gray-400">Your Email</label>
-                                    <input 
-                                        type="email" 
-                                        id="email"
-                                        name="email" 
-                                        required 
-                                        value={formData.email}
-                                        className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#1ed760] focus:ring-1 focus:ring-[#1ed760] transition-all placeholder-gray-600" 
-                                        placeholder="e.g. john@example.com"
-                                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                    />
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label htmlFor="message" className="text-sm font-medium text-gray-400">Message</label>
-                                    <textarea
-                                        id="message"
-                                        name="message" 
-                                        required
-                                        value={formData.message}
-                                        rows={4}
-                                        className="w-full bg-[#111] border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#1ed760] focus:ring-1 focus:ring-[#1ed760] transition-all placeholder-gray-600 resize-none" 
-                                        placeholder="Write your message here..."
-                                        onChange={(e) => setFormData({...formData, message: e.target.value})}
-                                    />
-                                </div>
-
-                                <button 
-                                    type="submit"
-                                    disabled={isSubmitting}
-                                    className={`w-full bg-[#1ed760] text-black font-bold py-3 px-6 rounded-lg transition-all hover:bg-[#1db954] hover:shadow-[0_0_20px_rgba(30,215,96,0.3)] hover:-translate-y-1 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                >
-                                    {isSubmitting ? "Sending..." : "Send Message"}
-                                </button>
-                            </form>
+                        <div className="p-3.5 bg-[#0c0c0e] border border-gray-800 rounded-xl flex items-center space-x-3">
+                            <div className="p-2.5 rounded-lg bg-[#1ed760]/10 text-[#1ed760] border border-[#1ed760]/30">
+                                <FontAwesomeIcon icon={faMapMarkerAlt} />
+                            </div>
+                            <div>
+                                <span className="text-[10px] text-gray-500 block">LOCATION_NODE</span>
+                                <span className="text-white font-semibold">
+                                    Bacolod City, Philippines
+                                </span>
+                            </div>
                         </div>
+                    </div>
 
+                    <div className="text-xs font-mono text-gray-500">
+                        &gt; System status: Online // Response latency ~24hrs
                     </div>
                 </div>
-            </ReviewOnScroll>
-        </section>  
+
+                {/* RIGHT COLUMN: Interactive Contact Form Panel */}
+                <div className="flex flex-col justify-center h-full py-2">
+                    <div className="bg-[#0c0c0e] border border-gray-800 rounded-2xl overflow-hidden shadow-2xl">
+                        
+                        <div className="flex items-center justify-between px-4 py-2.5 bg-[#141418] border-b border-gray-800 text-xs font-mono text-gray-400">
+                            <div className="flex items-center space-x-2">
+                                <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
+                                <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
+                                <span className="w-2.5 h-2.5 rounded-full bg-[#1ed760]/80 inline-block" />
+                            </div>
+                            <span>message_payload.json — POST</span>
+                            <span className="text-[#1ed760] text-[10px]">READY</span>
+                        </div>
+
+                        <form className="p-6 space-y-4 font-mono" onSubmit={handleSubmit}>
+                            
+                            <div className="space-y-1">
+                                <label htmlFor="name" className="text-xs text-gray-400 flex items-center gap-1">
+                                    <span className="text-[#1ed760]">&gt;_</span>
+                                    <span>"sender_name":</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="name"
+                                    name="name" 
+                                    required 
+                                    value={formData.name} 
+                                    className="w-full bg-black/60 border border-gray-800 rounded-lg px-3 py-2 text-xs text-[#1ed760] focus:outline-none focus:border-[#1ed760] transition-all placeholder-gray-700 font-mono" 
+                                    placeholder="e.g. Jane Doe"
+                                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                />
+                            </div>
+
+                            <div className="space-y-1">
+                                <label htmlFor="email" className="text-xs text-gray-400 flex items-center gap-1">
+                                    <span className="text-[#1ed760]">&gt;_</span>
+                                    <span>"sender_email":</span>
+                                </label>
+                                <input 
+                                    type="email" 
+                                    id="email"
+                                    name="email" 
+                                    required 
+                                    value={formData.email}
+                                    className="w-full bg-black/60 border border-gray-800 rounded-lg px-3 py-2 text-xs text-[#1ed760] focus:outline-none focus:border-[#1ed760] transition-all placeholder-gray-700 font-mono" 
+                                    placeholder="e.g. jane@example.com"
+                                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                />
+                            </div>
+
+                            <div className="space-y-1">
+                                <label htmlFor="message" className="text-xs text-gray-400 flex items-center gap-1">
+                                    <span className="text-[#1ed760]">&gt;_</span>
+                                    <span>"message_body":</span>
+                                </label>
+                                <textarea
+                                    id="message"
+                                    name="message" 
+                                    required
+                                    value={formData.message}
+                                    rows={3}
+                                    className="w-full bg-black/60 border border-gray-800 rounded-lg px-3 py-2 text-xs text-[#1ed760] focus:outline-none focus:border-[#1ed760] transition-all placeholder-gray-700 resize-none font-mono" 
+                                    placeholder="Write your transmission content here..."
+                                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                                />
+                            </div>
+
+                            <button 
+                                type="submit"
+                                disabled={isSubmitting}
+                                className={`w-full bg-[#1ed760] text-black font-bold text-xs py-2.5 px-4 rounded-lg border border-[#1ed760] transition-all hover:bg-white hover:border-white shadow-[0_0_15px_rgba(30,215,96,0.3)] flex items-center justify-center gap-2 ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            >
+                                <FontAwesomeIcon icon={faPaperPlane} className="text-xs" />
+                                <span>{isSubmitting ? "TRANSMITTING..." : ">_ EXECUTE_TRANSMISSION"}</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     );
 };

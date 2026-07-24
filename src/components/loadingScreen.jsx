@@ -1,109 +1,85 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export const LoadingScreen = ({ onComplete }) => {
   const [progress, setProgress] = useState(0);
-  const [isFinished, setIsFinished] = useState(false);
+  const [currentText, setCurrentText] = useState("INITIALIZING FULL-STACK ENVIRONMENT...");
+
+  const bootLogs = [
+    "INITIALIZING FULL-STACK ENVIRONMENT...",
+    "MOUNTING REACT, TAILWIND & DJANGO KERNEL...",
+    "CONNECTING POSTGRE & FIREBASE SCHEMAS...",
+    "OPTIMIZING SINGLE-SCREEN SPA RENDERER...",
+    "SYSTEM READY // ACCESS GRANTED"
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setIsFinished(true);
-          // Small delay for the visual "Hero Time" reveal before unmounting
-          setTimeout(onComplete, 1500);
+          setTimeout(onComplete, 400); // Quick instant cross-fade
           return 100;
         }
-        const jump = Math.floor(Math.random() * 15) + 5;
-        return Math.min(prev + jump, 100);
+        const jump = Math.floor(Math.random() * 12) + 6;
+        const nextVal = Math.min(prev + jump, 100);
+        
+        const logIdx = Math.min(
+          Math.floor((nextVal / 100) * bootLogs.length),
+          bootLogs.length - 1
+        );
+        setCurrentText(bootLogs[logIdx]);
+        
+        return nextVal;
       });
-    }, 100);
+    }, 70);
 
     return () => clearInterval(interval);
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-black overflow-hidden">
-      <AnimatePresence mode="wait">
-        {!isFinished ? (
-          <motion.div
-            key="loading"
-            exit={{ 
-              scale: 1.2, 
-              opacity: 0, 
-              filter: "brightness(2) blur(5px)",
-            }}
-            transition={{ duration: 0.5 }}
-            className="relative flex flex-col items-center"
-          >
-            {/* Target Rings */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                className="w-[300px] h-[300px] border-2 border-[#1ed760]/20 rounded-full border-dashed"
-              />
-            </div>
+    <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-[#0a0a0a] text-white font-sans overflow-hidden px-6">
+      
+      {/* Background Matrix Grid Overlay */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[linear-gradient(to_right,rgba(30,215,96,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(30,215,96,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-            {/* Omnitrix Hourglass */}
-            <div className="relative w-48 h-48 flex items-center justify-center">
-              <div className="absolute inset-0 bg-[#1ed760] rounded-full opacity-10 blur-2xl animate-pulse" />
-              <div className="relative w-full h-full bg-[#111] rounded-full border-4 border-[#222] flex items-center justify-center overflow-hidden">
-                <div 
-                  className="w-32 h-32 bg-[#1ed760] transition-all duration-300 shadow-[0_0_15px_#1ed760]"
-                  style={{
-                    clipPath: "polygon(20% 0%, 80% 0%, 50% 50%, 80% 100%, 20% 100%, 50% 50%)",
-                    opacity: 0.2 + (progress / 100) * 0.8
-                  }}
-                />
-                <div 
-                  className="absolute inset-0 bg-black/70 transition-all duration-300"
-                  style={{ height: `${100 - progress}%` }}
-                />
-              </div>
-            </div>
+      {/* Main Centered Content */}
+      <div className="flex flex-col items-center text-center space-y-6 max-w-xl z-10">
+        
+        {/* Terminal Header Tag */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#0c0c0e] border border-[#1ed760]/30 rounded text-xs font-mono text-gray-400">
+          <span className="w-2 h-2 rounded-full bg-[#1ed760] animate-pulse" />
+          <span className="text-[#1ed760] font-semibold">kr1stik@sys_init:~$</span>
+          <span>./boot.sh</span>
+        </div>
 
-            <div className="mt-12 text-center">
-              <div className="text-[#1ed760] font-orbitron text-5xl font-bold tracking-[0.2em] mb-3 text-glow-green">
-                {progress}%
-              </div>
-              <div className="text-gray-500 font-mono text-[10px] tracking-[0.5em] uppercase">
-                Calibrating Omnitrix...
-              </div>
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="reveal"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ 
-                scale: [0.8, 1.1, 1], 
-                opacity: 1,
-            }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col items-center"
-          >
-            <motion.div 
-              animate={{ 
-                boxShadow: ["0 0 20px #1ed760", "0 0 60px #1ed760", "0 0 20px #1ed760"],
-              }}
-              transition={{ duration: 0.4, repeat: Infinity }}
-              className="w-64 h-64 bg-[#1ed760] flex items-center justify-center rounded-full mb-8 shadow-[0_0_40px_#1ed760]"
-              style={{
-                clipPath: "polygon(20% 0%, 80% 0%, 50% 50%, 80% 100%, 20% 100%, 50% 50%)"
-              }}
-            />
-            <motion.h1 
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              className="text-[#1ed760] text-6xl font-bold font-orbitron text-glow-green tracking-widest"
-            >
-              HERO TIME
-            </motion.h1>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        {/* Counter & Wide Geometric Sans Title */}
+        <div className="space-y-2">
+          <div className="text-4xl sm:text-6xl font-extrabold text-[#1ed760] font-sans tracking-tight drop-shadow-[0_0_12px_rgba(30,215,96,0.4)]">
+            {progress}%
+          </div>
+
+          <div className="text-xs sm:text-sm font-mono text-gray-300 tracking-wider h-6 flex items-center justify-center gap-2">
+            <span className="text-[#1ed760]">&gt;_</span>
+            <span>{currentText}</span>
+          </div>
+        </div>
+
+        {/* Sleek Minimalist Glowing Neon Green Progress Bar */}
+        <div className="w-full max-w-md bg-gray-900/80 h-1.5 rounded-full overflow-hidden border border-[#1ed760]/30 shadow-[0_0_10px_rgba(30,215,96,0.2)]">
+          <motion.div 
+            className="h-full bg-[#1ed760] shadow-[0_0_10px_#1ed760]"
+            style={{ width: `${progress}%` }}
+            transition={{ ease: "linear" }}
+          />
+        </div>
+
+        {/* Monospace Stack Summary Data */}
+        <div className="text-[11px] font-mono text-gray-500 tracking-widest uppercase pt-2">
+          CORE: REACT • TAILWIND • DJANGO • POSTGRE • FIREBASE
+        </div>
+
+      </div>
     </div>
   );
 };

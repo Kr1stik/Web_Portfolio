@@ -1,17 +1,11 @@
 import { motion } from "framer-motion";
-import { useTechSound } from "../hooks/useTechSound";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExternalLinkAlt, faCodeBranch, faImage } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare, faFolder } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
-const TechBadge = ({ tech }) => (
-  <span className="bg-[#1ed760]/10 text-[#1ed760] py-1 px-3 border border-[#1ed760]/20 text-[10px] font-mono uppercase tracking-widest rounded-sm hover:bg-[#1ed760]/20 hover:border-[#1ed760]/50 transition-all">
-    {tech}
-  </span>
-);
+const coreFeaturedSkills = ["React", "Vue", "TypeScript", "Django", "NestJS", "PostgreSQL"];
 
 export const ProjectCard = ({ project }) => {
-  const { playHoverSound } = useTechSound();
   const { title, description, techStack, link, github, image, status } = project;
 
   return (
@@ -19,88 +13,98 @@ export const ProjectCard = ({ project }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      onMouseEnter={playHoverSound}
-      className="group relative flex flex-col bg-[#111] border border-[#1ed760]/20 chamfered-card overflow-hidden transition-all duration-500 hover:border-[#1ed760]/50 hover:shadow-[0_0_30px_rgba(30,215,96,0.1)]"
+      whileHover={{ y: -4 }}
+      transition={{ duration: 0.3 }}
+      className="group flex flex-col bg-white/5 border border-white/10 hover:border-[#1ed760]/50 rounded-2xl overflow-hidden transition-all duration-300 backdrop-blur-md shadow-xl"
     >
-      {/* Project Image Area */}
-      <div className="relative h-64 overflow-hidden bg-[#0a0a0a]">
+      {/* Image Preview Container */}
+      <div className="relative h-52 overflow-hidden bg-[#050505]">
         {image ? (
           <img 
             src={image} 
             alt={title} 
-            className="w-full h-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+            className="w-full h-full object-cover grayscale opacity-75 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
           />
         ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center text-[#1ed760]/20">
-            <FontAwesomeIcon icon={faImage} className="text-5xl mb-3" />
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em]">Data Missing</span>
+          <div className="w-full h-full flex flex-col items-center justify-center text-neutral-600 gap-2">
+            <FontAwesomeIcon icon={faFolder} className="text-4xl text-[#1ed760]/40" />
+            <span className="text-xs font-medium uppercase tracking-wider text-neutral-500">Project Archive</span>
           </div>
         )}
-        
-        {/* Overlay Gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-transparent to-transparent" />
-        <div className="absolute top-4 left-4">
-           {status && (
-             <div className="flex items-center gap-2 bg-black/80 border border-[#1ed760]/30 px-3 py-1 rounded-sm backdrop-blur-md">
-                <div className={`w-1.5 h-1.5 rounded-full animate-pulse ${status === 'Coming Soon' ? 'bg-yellow-500 shadow-[0_0_8px_#eab308]' : 'bg-[#1ed760] shadow-[0_0_8px_#1ed760]'}`} />
-                <span className="text-[9px] font-mono text-white uppercase tracking-widest">{status}</span>
-             </div>
-           )}
-        </div>
+
+        {/* Status Badge */}
+        {status && (
+          <div className="absolute top-3 left-3">
+            <span className={`px-2.5 py-1 rounded-full text-[11px] font-semibold backdrop-blur-md border ${
+              status === 'Coming Soon'
+                ? 'bg-amber-500/10 text-amber-400 border-amber-500/30'
+                : 'bg-[#1ed760]/10 text-[#1ed760] border-[#1ed760]/30'
+            }`}>
+              {status}
+            </span>
+          </div>
+        )}
       </div>
 
-      {/* Content Area */}
-      <div className="p-8 flex flex-col flex-grow">
-        <div className="flex justify-between items-start mb-6">
-           <h3 className="text-2xl font-bold text-white font-orbitron tracking-tight group-hover:text-glow-green transition-all">
-             {title}
-           </h3>
-           <div className="flex gap-4">
-             {github && github !== "#" && (
-                <a 
-                  href={github} 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="text-gray-500 hover:text-[#1ed760] transition-colors"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <FontAwesomeIcon icon={faGithub} className="text-xl" />
-                </a>
-             )}
-             {link && link !== "#" && (
-                <a 
-                  href={link} 
-                  target="_blank" 
-                  rel="noreferrer"
-                  className="text-gray-500 hover:text-[#1ed760] transition-colors"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <FontAwesomeIcon icon={faExternalLinkAlt} className="text-xl" />
-                </a>
-             )}
-           </div>
+      {/* Card Content Area */}
+      <div className="p-6 flex flex-col flex-grow space-y-4">
+        {/* Title & Action Links */}
+        <div className="flex justify-between items-start gap-3">
+          <h3 className="text-xl font-bold text-white group-hover:text-[#1ed760] transition-colors">
+            {title}
+          </h3>
+
+          <div className="flex items-center gap-3 text-neutral-400 shrink-0">
+            {github && github !== "#" && (
+              <a 
+                href={github} 
+                target="_blank" 
+                rel="noreferrer"
+                className="hover:text-[#1ed760] transition-colors p-1"
+                title="GitHub Repository"
+              >
+                <FontAwesomeIcon icon={faGithub} className="text-lg" />
+              </a>
+            )}
+            {link && link !== "#" && (
+              <a 
+                href={link} 
+                target="_blank" 
+                rel="noreferrer"
+                className="hover:text-[#1ed760] transition-colors p-1"
+                title="Live Deployment"
+              >
+                <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="text-sm" />
+              </a>
+            )}
+          </div>
         </div>
 
-        <p className="text-gray-400 font-mono text-sm leading-relaxed mb-8 flex-grow">
+        {/* Description */}
+        <p className="text-sm text-neutral-300 leading-relaxed flex-grow">
           {description}
         </p>
-        
-        <div className="flex flex-wrap gap-2 mt-auto">
-          {techStack.map((tech, key) => (
-            <TechBadge key={key} tech={tech} />
-          ))}
+
+        {/* Tech Stack Badges with Neon Green Highlights */}
+        <div className="flex flex-wrap gap-2 pt-3 border-t border-white/5">
+          {techStack.map((tech, idx) => {
+            const isCore = coreFeaturedSkills.includes(tech);
+            return (
+              <span 
+                key={idx} 
+                className={`px-2.5 py-0.5 text-[11px] font-semibold rounded-lg border transition-colors ${
+                  isCore 
+                    ? "bg-[#1ed760]/15 text-[#1ed760] border-[#1ed760]/40 shadow-[0_0_8px_rgba(30,215,96,0.15)]"
+                    : "bg-white/5 text-neutral-300 border-white/10"
+                }`}
+              >
+                {tech}
+              </span>
+            );
+          })}
         </div>
       </div>
 
-      {/* Decorative Hardware Elements */}
-      <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none opacity-20">
-         <div className="absolute top-4 right-4 w-8 h-[1px] bg-[#1ed760]" />
-         <div className="absolute top-4 right-4 w-[1px] h-8 bg-[#1ed760]" />
-      </div>
-      <div className="absolute bottom-0 left-0 w-16 h-16 pointer-events-none opacity-20">
-         <div className="absolute bottom-4 left-4 w-8 h-[1px] bg-[#1ed760]" />
-         <div className="absolute bottom-4 left-4 w-[1px] h-8 bg-[#1ed760]" />
-      </div>
     </motion.div>
   );
 };

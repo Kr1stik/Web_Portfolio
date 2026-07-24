@@ -1,74 +1,72 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --color-neon-green: #1ed760;
+  --color-bg-dark: #0a0a0a;
+}
+
 :root {
-  --omnitrix-green: #1ed760;
-  --dark-bg: #0a0a0a;
-  --dark-card: #111111;
+  --neon-green: #1ed760;
+  --bg-dark: #0a0a0a;
+  --card-dark: #0c0c0e;
+  --border-dark: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 html, 
 body {
   margin: 0;
   padding: 0;
-  font-family: "JetBrains Mono", monospace;
-  background: var(--dark-bg);
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-dark);
   color: #f3f4f6;
-  overflow-x: hidden;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Orbitron", sans-serif;
-  letter-spacing: 0.1em;
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: -0.03em;
+}
+
+/* Hide Scrollbar Utility for Clean IDE Aesthetic */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* GPU acceleration helper */
+.gpu-layer {
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
 
 @layer utilities {
-  .chamfered {
-    clip-path: polygon(
-      10% 0%, 90% 0%, 100% 10%, 
-      100% 90%, 90% 100%, 10% 100%, 
-      0% 90%, 0% 10%
-    );
+  .glass-dock {
+    background: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(30, 215, 96, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 0 0 20px rgba(30, 215, 96, 0.15);
   }
 
-  .chamfered-card {
-    clip-path: polygon(
-      0% 10px, 10px 0%, 
-      calc(100% - 10px) 0%, 100% 10px, 
-      100% calc(100% - 10px), calc(100% - 10px) 100%, 
-      10px 100%, 0% calc(100% - 10px)
-    );
+  .text-neon-green {
+    color: #1ed760;
   }
 
   .glow-green {
-    box-shadow: 0 0 15px var(--omnitrix-green);
-  }
-
-  .text-glow-green {
-    text-shadow: 0 0 10px var(--omnitrix-green);
-  }
-
-  @keyframes blink {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0;
-    }
-  }
-
-  .animate-blink{
-    animation: blink 0.8s step-end infinite;
-  }
-
-  .perspective-1000 {
-    perspective: 1000px;
-  }
-
-  .preserve-3d {
-    transform-style: preserve-3d;
-  }
-
-  .backface-hidden {
-    backface-visibility: hidden;
+    box-shadow: 0 0 15px rgba(30, 215, 96, 0.35);
   }
 }
