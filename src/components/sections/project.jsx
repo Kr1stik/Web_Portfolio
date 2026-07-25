@@ -8,7 +8,7 @@ export const Projects = () => {
     const projects = [
         {
             title: "HREDRD",
-            description: "A comprehensive Human Resources and Centralized Data Registry system designed for high-performance data management and secure employee tracking.",
+            description: "A comprehensive Housing and Real Estate Development Regulation Division system developed for DHSUD, engineered for offline-first data management and regional operations.",
             techStack: ["React", "TypeScript", "Django", "PostgreSQL"],
             link: "#",
             github: "#",

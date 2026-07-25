@@ -22,15 +22,15 @@ export const About = () => {
             role: "System Developer Intern",
             company: "Department of Human Settlements and Urban Development (DHSUD)",
             period: "February 2026 – April 2026",
-            description: "Engineered a suite of offline-first software applications, including the Homeowners Association (HOA) registry and the Environmental, Land Use, and Urban Planning and Development division system to optimize regional operations and data synchronization.",
+            description: "Engineered a suite of offline-first software applications, including the HREDRD (Housing and Real Estate Development Regulation Division) system and the Environmental, Land Use, and Urban Planning and Development division system to optimize regional operations and data synchronization.",
             highlight: "Sole Internship / Offline-First Systems"
         },
         {
             role: "Assistant Programmer",
             company: "Devinnovate",
             period: "2024 - 2025",
-            description: "Assisted in architecting backend services, RESTful API endpoints, and database schemas within Python and Django ecosystems.",
-            highlight: "Backend Engineering"
+            description: "Assisted in developing frontend features and user interfaces, as well as architecting backend services, RESTful API endpoints, and database schemas within Python and Django ecosystems.",
+            highlight: "Full-Stack Development"
         }
     ];
 
