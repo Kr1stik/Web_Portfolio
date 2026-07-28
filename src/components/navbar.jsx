@@ -6,11 +6,12 @@ import {
   faUser, 
   faFolderOpen, 
   faEnvelope, 
-  faFilePdf 
+  faFilePdf,
+  faTerminal 
 } from "@fortawesome/free-solid-svg-icons";
 import resumePDF from "../assets/Barrera_Resume (1).pdf";
 
-export const Navbar = ({ currentView, setCurrentView }) => {
+export const Navbar = ({ currentView, setCurrentView, isModalOpen }) => {
   const mouseX = useMotionValue(Infinity);
   const [isHoverSupported, setIsHoverSupported] = useState(true);
 
@@ -26,16 +27,23 @@ export const Navbar = ({ currentView, setCurrentView }) => {
     return () => window.removeEventListener("resize", checkHoverSupport);
   }, []);
 
+  const isTerminalActive = currentView === "terminal" || currentView === "chat" || isModalOpen;
+
   const dockItems = [
     { id: "home", label: "Home", icon: faHome },
     { id: "about", label: "Experience", icon: faUser },
     { id: "projects", label: "Projects", icon: faFolderOpen },
     { id: "contacts", label: "Contact", icon: faEnvelope },
+    { id: "terminal", label: "AI Terminal", icon: faTerminal },
     { id: "resume", label: "Resume", icon: faFilePdf, href: resumePDF, download: true }
   ];
 
   return (
-    <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto flex justify-center max-w-[95vw]">
+    <div className={`fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto flex justify-center max-w-[95vw] transition-all duration-300 ${
+      isTerminalActive 
+        ? "translate-y-32 opacity-0 pointer-events-none" 
+        : "translate-y-0 opacity-100"
+    }`}>
       <motion.div
         onMouseMove={(e) => isHoverSupported && mouseX.set(e.pageX)}
         onMouseLeave={() => isHoverSupported && mouseX.set(Infinity)}

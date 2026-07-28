@@ -1,13 +1,23 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram, faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import { faDownload, faTimes, faFileAlt, faArrowUpRightFromSquare, faCode } from "@fortawesome/free-solid-svg-icons";
+import { faDownload, faTimes, faFileAlt, faArrowUpRightFromSquare, faCode, faTerminal } from "@fortawesome/free-solid-svg-icons";
 import resumePDF from "../../assets/Barrera_Resume (1).pdf";
 
-export const Home = ({ setCurrentView }) => {
+export const Home = ({ setCurrentView, setIsModalOpen }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const primaryCoreStack = ["React", "Tailwind CSS", "Django", "PostgreSQL", "Firebase"];
+  const openResumeModal = () => {
+    setShowModal(true);
+    if (setIsModalOpen) setIsModalOpen(true);
+  };
+
+  const closeResumeModal = () => {
+    setShowModal(false);
+    if (setIsModalOpen) setIsModalOpen(false);
+  };
+
+  const primaryCoreStack = ["React", "Next.js", "Vite", "Tailwind CSS", "Django", "PostgreSQL", "Firebase"];
 
   return (
     <div className="w-full h-full overflow-y-auto no-scrollbar max-h-[calc(100vh-140px)] p-2 sm:p-4 font-sans">
@@ -49,7 +59,7 @@ export const Home = ({ setCurrentView }) => {
             </a>
 
             <button 
-              onClick={() => setShowModal(true)}
+              onClick={openResumeModal}
               className="px-5 py-2.5 bg-white/5 hover:bg-white/10 text-white font-mono text-xs rounded-xl border border-white/15 hover:border-[#1ed760]/40 transition-all flex items-center gap-2"
             >
               <FontAwesomeIcon icon={faFileAlt} className="text-[#1ed760]" />
@@ -76,6 +86,31 @@ export const Home = ({ setCurrentView }) => {
                 <FontAwesomeIcon icon={social.icon} className="text-base" />
               </a>
             ))}
+          </div>
+
+          {/* AI Assistant Call-To-Action (Tired of Scrolling?) */}
+          <div className="p-4 rounded-xl bg-black/50 border border-gray-800 hover:border-[#1ed760]/40 transition-all backdrop-blur-md space-y-2.5 shadow-xl">
+            <div className="flex items-center justify-between text-xs font-mono text-[#1ed760]">
+              <span className="flex items-center gap-1.5 font-bold">
+                <FontAwesomeIcon icon={faTerminal} />
+                <span>&gt;_ SYSTEM_DETECTS_FATIGUE</span>
+              </span>
+              <span className="text-[10px] bg-[#1ed760]/10 text-[#1ed760] px-2 py-0.5 rounded border border-[#1ed760]/30 animate-pulse">
+                AI ONLINE
+              </span>
+            </div>
+            
+            <p className="text-xs text-neutral-300 font-mono leading-relaxed">
+              Skip the scrolling and ask my AI Assistant about my tech stack, DHSUD experience, or projects directly.
+            </p>
+
+            <button 
+              onClick={() => setCurrentView("terminal")}
+              className="w-full py-2 bg-[#1ed760]/10 hover:bg-[#1ed760] text-[#1ed760] hover:text-black font-mono text-xs font-bold rounded-lg border border-[#1ed760]/40 hover:border-[#1ed760] transition-all flex items-center justify-center gap-2 shadow-[0_0_12px_rgba(30,215,96,0.15)] group cursor-pointer"
+            >
+              <FontAwesomeIcon icon={faTerminal} className="text-xs group-hover:scale-110 transition-transform" />
+              <span>[ LAUNCH TERMINAL ]</span>
+            </button>
           </div>
 
         </div>
@@ -164,7 +199,7 @@ export const Home = ({ setCurrentView }) => {
       {showModal && (
         <div 
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/85 backdrop-blur-xl p-4 md:p-6"
-          onClick={() => setShowModal(false)}
+          onClick={closeResumeModal}
         >
           <div 
             className="bg-[#0c0c0e] border border-[#1ed760]/30 rounded-2xl w-full max-w-5xl h-[85vh] flex flex-col shadow-2xl overflow-hidden"
@@ -176,12 +211,12 @@ export const Home = ({ setCurrentView }) => {
                 <a 
                   href={resumePDF} 
                   download="Barrera_Resume.pdf"
-                  className="px-3.5 py-1.5 bg-[#1ed760] text-black font-bold font-mono text-xs rounded-lg transition-all hover:bg-white flex items-center gap-1.5"
+                  className="px-3.5 py-1.5 bg-[#1ed760] text-black font-bold font-mono text-[#1ed760] text-xs rounded-lg transition-all hover:bg-white flex items-center gap-1.5"
                 >
                   <FontAwesomeIcon icon={faDownload} />
                   <span>EXTRACT</span>
                 </a>
-                <button onClick={() => setShowModal(false)} className="text-neutral-400 hover:text-white p-1">
+                <button onClick={closeResumeModal} className="text-neutral-400 hover:text-white p-1">
                   <FontAwesomeIcon icon={faTimes} className="text-lg" />
                 </button>
               </div>

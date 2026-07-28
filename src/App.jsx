@@ -8,23 +8,28 @@ import { Home } from "./components/sections/home";
 import { About } from "./components/sections/about";
 import { Contacts } from "./components/sections/contacts";
 import { Projects } from "./components/sections/project";
+import { TerminalChat } from "./components/TerminalChat";
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentView, setCurrentView] = useState("home");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const renderView = () => {
     switch (currentView) {
       case "home":
-        return <Home setCurrentView={setCurrentView} />;
+        return <Home setCurrentView={setCurrentView} setIsModalOpen={setIsModalOpen} />;
       case "about":
         return <About setCurrentView={setCurrentView} />;
       case "projects":
         return <Projects setCurrentView={setCurrentView} />;
       case "contacts":
         return <Contacts setCurrentView={setCurrentView} />;
+      case "terminal":
+      case "chat":
+        return <TerminalChat setCurrentView={setCurrentView} />;
       default:
-        return <Home setCurrentView={setCurrentView} />;
+        return <Home setCurrentView={setCurrentView} setIsModalOpen={setIsModalOpen} />;
     }
   };
 
@@ -126,6 +131,7 @@ function App() {
         <Navbar 
           currentView={currentView} 
           setCurrentView={setCurrentView} 
+          isModalOpen={isModalOpen}
         />
       </motion.div>
     </div>

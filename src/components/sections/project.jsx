@@ -12,7 +12,9 @@ export const Projects = () => {
             techStack: ["React", "TypeScript", "Django", "PostgreSQL"],
             link: "#",
             github: "#",
-            status: "Completed",
+            status: "Government Only",
+            isGovOnly: true,
+            warningMsg: "Developed exclusively for the Department of Human Settlements and Urban Development (DHSUD). System access and source code are strictly restricted to authorized government personnel.",
             image: hredrdImg 
         },
         {
@@ -52,6 +54,15 @@ export const Projects = () => {
             image: null 
         },
         {
+            title: "StainScan (Web System)",
+            description: "An image processing platform designed to adapt and detect stains via computer vision. Engineered and deployed the complete web application system alongside the project's mobile counterpart.",
+            techStack: ["Next.js", "PostgreSQL", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+            link: "https://stain-scan.vercel.app/",
+            github: "https://github.com/Kr1stik/StainScan",
+            status: "Completed",
+            image: null 
+        },
+        {
             title: "FilmRate",
             description: "A social movie review application allowing users to rate, review, and discover new films with a Django backend.",
             techStack: ["Python", "Django", "Tailwind CSS"],
@@ -80,14 +91,14 @@ export const Projects = () => {
                         </h2>
 
                         <p className="text-sm text-neutral-300 leading-relaxed max-w-md">
-                            A curated showcase of production web applications, developer tools, and client platforms built with React, Vue, Django, and PostgreSQL.
+                            A curated showcase of production web applications, developer tools, and client platforms built with React, Vite, Django, and PostgreSQL.
                         </p>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3 font-mono">
                         <div className="p-3 bg-[#0c0c0e] border border-gray-800 rounded-xl space-y-1">
                             <span className="text-[10px] text-gray-500 block">TOTAL_BUILDS</span>
-                            <span className="text-xl font-bold text-white">06</span>
+                            <span className="text-xl font-bold text-white">07</span>
                         </div>
                         <div className="p-3 bg-[#0c0c0e] border border-gray-800 rounded-xl space-y-1">
                             <span className="text-[10px] text-gray-500 block">STATUS</span>
@@ -111,7 +122,7 @@ export const Projects = () => {
                                 <span className="w-2.5 h-2.5 rounded-full bg-[#1ed760]/80 inline-block" />
                             </div>
                             <span>deployments.json</span>
-                            <span className="text-[#1ed760] text-[10px]">6 ITEMS</span>
+                            <span className="text-[#1ed760] text-[10px]">7 ITEMS</span>
                         </div>
 
                         <div className="p-4 space-y-4 overflow-y-auto no-scrollbar flex-1">

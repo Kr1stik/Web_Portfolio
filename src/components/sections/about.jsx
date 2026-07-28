@@ -1,14 +1,85 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBriefcase, faGraduationCap, faCodeBranch, faTerminal } from "@fortawesome/free-solid-svg-icons";
+import { 
+    faBriefcase, 
+    faGraduationCap, 
+    faCodeBranch, 
+    faTerminal,
+    faLayerGroup,
+    faServer,
+    faDatabase,
+    faCloudUploadAlt,
+    faLaptopCode,
+    faRobot
+} from "@fortawesome/free-solid-svg-icons";
 
 export const About = () => {
     
     // Primary Core Stack
-    const primaryCoreStack = ["React", "Tailwind CSS", "Django", "PostgreSQL", "Firebase"];
+    const primaryCoreStack = ["React", "Next.js", "Vite", "Tailwind CSS", "Django", "PostgreSQL", "Firebase"];
 
     // Full Capabilities List categorized by Frontend and Backend/Logic
-    const frontendCapabilities = ["HTML", "CSS", "JavaScript", "React", "Next.js", "TypeScript", "Tailwind CSS"];
+    const frontendCapabilities = ["HTML", "CSS", "JavaScript", "React", "Next.js", "Vite", "TypeScript", "Tailwind CSS"];
     const backendCapabilities = ["Python", "Django", "PHP", "Node.js", "PostgreSQL", "MySQL", "Firebase"];
+
+    // Structured System Architecture & Toolchain Data
+    const toolchainCategories = [
+        {
+            title: ">_ FRONTEND_ENVIRONMENT",
+            icon: faLayerGroup,
+            tools: [
+                { name: "React" },
+                { name: "Vite" },
+                { name: "TypeScript" },
+                { name: "Tailwind CSS" }
+            ]
+        },
+        {
+            title: ">_ BACKEND_ECOSYSTEM",
+            icon: faServer,
+            tools: [
+                { name: "Django" },
+                { name: "NestJS" },
+                { name: "Node.js" }
+            ]
+        },
+        {
+            title: "[SYS_DB]",
+            icon: faDatabase,
+            tools: [
+                { name: "PostgreSQL" },
+                { name: "SQLite" }
+            ]
+        },
+        {
+            title: ">_ DEPLOYMENT_BUILD",
+            icon: faCloudUploadAlt,
+            tools: [
+                { name: "Vercel" },
+                { name: "Vite" },
+                { name: "Render" },
+                { name: "npm" }
+            ]
+        },
+        {
+            title: ">_ EDITOR_DESIGN",
+            icon: faLaptopCode,
+            tools: [
+                { name: "Figma" },
+                { name: "VS Code" }
+            ]
+        },
+        {
+            title: ">_ WORKFLOW_AI",
+            icon: faRobot,
+            tools: [
+                { name: "Git" },
+                { name: "GitHub" },
+                { name: "Claude" },
+                { name: "OpenAI" },
+                { name: "Antigravity CLI", active: true }
+            ]
+        }
+    ];
 
     const experiences = [
         {
@@ -26,6 +97,13 @@ export const About = () => {
             highlight: "Sole Internship / Offline-First Systems"
         },
         {
+            role: "Data Encoder",
+            company: "STI West Negros University",
+            period: "June 2025",
+            description: "Managed and encoded high volumes of student records into the university's centralized information system. Facilitated digital enrollment workflows through rapid data entry and verified sensitive student data in strict compliance with university privacy protocols.",
+            highlight: "Data Management & System Compliance"
+        },
+        {
             role: "Assistant Programmer",
             company: "Devinnovate",
             period: "2024 - 2025",
@@ -37,10 +115,10 @@ export const About = () => {
     return (
         <div className="w-full h-full overflow-y-auto no-scrollbar max-h-[calc(100vh-140px)] p-2 sm:p-4 font-sans">
             {/* 2-Column Split Pane Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center max-w-6xl mx-auto min-h-full py-4">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start max-w-6xl mx-auto min-h-full py-4">
                 
                 {/* LEFT COLUMN: Context & Full Capabilities */}
-                <div className="flex flex-col justify-between space-y-5 text-left h-full py-2">
+                <div className="lg:col-span-5 flex flex-col justify-between space-y-5 text-left h-full py-2">
                     <div className="space-y-3">
                         <div className="flex items-center gap-2 text-xs font-mono text-[#1ed760]">
                             <FontAwesomeIcon icon={faBriefcase} />
@@ -53,7 +131,7 @@ export const About = () => {
                         </h2>
 
                         <p className="text-sm text-neutral-300 leading-relaxed max-w-md">
-                            Full-stack engineer dedicated to building clean, resilient, and scalable digital solutions across frontend and backend ecosystems.
+                            Full-stack engineer dedicated to building clean, resilient, and scalable digital solutions across frontend, backend ecosystems, and AI-assisted workflows.
                         </p>
                     </div>
 
@@ -110,9 +188,68 @@ export const About = () => {
                     </div>
                 </div>
 
-                {/* RIGHT COLUMN: Detailed Experience Panel (DHSUD sole internship) */}
-                <div className="flex flex-col justify-center h-full py-2">
-                    <div className="bg-[#0c0c0e] border border-gray-800 rounded-2xl overflow-hidden shadow-2xl h-full flex flex-col">
+                {/* RIGHT COLUMN: System Architecture & Toolchain + Experience Panel */}
+                <div className="lg:col-span-7 flex flex-col space-y-6 h-full py-2">
+                    
+                    {/* SECTION 1: System Architecture & Toolchain Panel */}
+                    <div className="bg-[#0c0c0e] border border-gray-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+                        {/* IDE Window Title Bar */}
+                        <div className="flex items-center justify-between px-4 py-2.5 bg-[#141418] border-b border-gray-800 text-xs font-mono text-gray-400 shrink-0">
+                            <div className="flex items-center space-x-2">
+                                <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 inline-block" />
+                                <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80 inline-block" />
+                                <span className="w-2.5 h-2.5 rounded-full bg-[#1ed760]/80 inline-block" />
+                            </div>
+                            <span className="text-neutral-200 font-bold">system_architecture.config</span>
+                            <span className="text-[#1ed760] text-[10px]">6 CATEGORIES</span>
+                        </div>
+
+                        {/* Terminal Panels Grid */}
+                        <div className="p-4 space-y-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {toolchainCategories.map((cat, idx) => (
+                                    <div 
+                                        key={idx} 
+                                        className="p-3.5 rounded-xl bg-black/50 border border-gray-800 hover:border-gray-700 transition-all flex flex-col justify-between space-y-2.5"
+                                    >
+                                        <div className="flex items-center justify-between text-xs font-mono text-[#1ed760] border-b border-gray-800/80 pb-2">
+                                            <div className="flex items-center gap-1.5">
+                                                <FontAwesomeIcon icon={cat.icon} className="text-[11px]" />
+                                                <span className="font-bold text-[11px] tracking-wide">{cat.title}</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex flex-wrap gap-1.5 font-mono">
+                                            {cat.tools.map((tool) => {
+                                                const isActive = tool.active;
+                                                return (
+                                                    <span 
+                                                        key={tool.name}
+                                                        className={`inline-flex items-center px-2.5 py-1 text-xs rounded border font-mono transition-all duration-200 cursor-default ${
+                                                            isActive
+                                                                ? "text-[#1ed760] border-[#1ed760] bg-[#1ed760]/10 shadow-[0_0_10px_rgba(30,215,96,0.3)] font-bold"
+                                                                : "text-neutral-400 bg-white/5 border-white/10 hover:text-[#1ed760] hover:border-[#1ed760] hover:shadow-[0_0_8px_#1ed760]"
+                                                        }`}
+                                                    >
+                                                        {isActive && (
+                                                            <span className="relative flex h-2 w-2 mr-1.5">
+                                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1ed760] opacity-75"></span>
+                                                                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#1ed760]"></span>
+                                                            </span>
+                                                        )}
+                                                        {tool.name}
+                                                    </span>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* SECTION 2: Detailed Experience Panel */}
+                    <div className="bg-[#0c0c0e] border border-gray-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col">
                         
                         {/* IDE Window Title Bar */}
                         <div className="flex items-center justify-between px-4 py-2.5 bg-[#141418] border-b border-gray-800 text-xs font-mono text-gray-400 shrink-0">
@@ -126,7 +263,7 @@ export const About = () => {
                         </div>
 
                         {/* Experience Entries List */}
-                        <div className="p-5 space-y-4 overflow-y-auto no-scrollbar flex-1">
+                        <div className="p-5 space-y-4 flex-1">
                             {experiences.map((exp, idx) => (
                                 <div 
                                     key={idx} 
@@ -177,3 +314,4 @@ export const About = () => {
         </div>
     );
 };
+
